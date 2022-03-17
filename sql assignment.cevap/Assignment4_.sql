@@ -5,12 +5,12 @@ from sale.order_item
 ),
 t2 as (
 select*,
-	lead(t1.net_amount) over(partition by t1.product_id order by t1.product_id,t1.discount) onceki_ay_satýs,
+	lead(t1.net_amount) over(partition by t1.product_id order by t1.product_id,t1.discount) onceki_ay_satis,
 	dense_rank() over(partition by t1.product_id order by t1.product_id, t1.discount) row_num
 from T1	),
 t3 as
 		(
-		select *,(t2.onceki_ay_satýs - t2.net_amount ) fark
+		select *,(t2.onceki_ay_satis - t2.net_amount ) fark
 		from t2
 		where t2.row_num  < 4
 		)
